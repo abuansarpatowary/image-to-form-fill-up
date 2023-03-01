@@ -15,6 +15,10 @@ function handleExtractClick() {
   // Create a new form data object and add the file to it
   const formData = new FormData();
   formData.append('image', file);
+  formData.append('language', 'eng');
+  formData.append('isOverlayRequired', 'true');
+  formData.append('ocrEngine', '2');
+  formData.append('detectOrientation', 'true');
 
   // Make a POST request to the OCR.Space API with the form data
   fetch('https://api.ocr.space/parse/image', {
