@@ -1,7 +1,7 @@
 // Get references to the HTML elements we need to manipulate
 const fileInput = document.getElementById('file-input');
 const extractButton = document.getElementById('extract-button');
-const resultText = document.getElementById('result-text');
+const resultText = document.getElementById('response-text');
 const radioButtons = document.querySelectorAll('.radio-buttons input[type="radio"]');
 const formData = new FormData();
 
@@ -56,7 +56,7 @@ function handleExtractClick() {
       // Get the extracted text from the first ParsedResult object in the array
       const extractedText = data.ParsedResults[0].ParsedText;
       // Display the extracted text in the result text element
-      // resultText.textContent = extractedText;
+      resultText.value = extractedText;
       console.log(extractedText);
       // After the text is extracted, clear the file input
       fileInput.value = '';
