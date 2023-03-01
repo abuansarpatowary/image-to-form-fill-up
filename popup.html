@@ -8,9 +8,25 @@
 
 <body>
     <h1>Image to Text</h1>
-    <input type="file" id="file-input"><br>
-    <button id="extract-button">Extract Text</button>
-    <div id="results"></div>
+    <div class="radio-buttons">
+        <label>
+          <input type="radio" name="options" value="1" />Turbo
+        </label>
+        <label>
+          <input type="radio" name="options" value="2"  />Fast
+        </label>
+        <label>
+          <input type="radio" name="options" value="3" checked/>Normal
+        </label>
+        <label>
+          <input type="radio" name="options" value="5" />Accurate
+        </label>
+      </div>      
+      <br>
+      <div class="file-input">
+          <input type="file" id="file-input"><br>
+          <button id="extract-button">Extract Text</button>
+        </div>
     <script src="js/popup.js"></script>
     <script src="js/content.js"></script>
 </body>

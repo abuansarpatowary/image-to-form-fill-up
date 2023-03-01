@@ -2,6 +2,25 @@
 const fileInput = document.getElementById('file-input');
 const extractButton = document.getElementById('extract-button');
 const resultText = document.getElementById('result-text');
+const radioButtons = document.querySelectorAll('.radio-buttons input[type="radio"]');
+const formData = new FormData();
+
+radioButtons.forEach(radioButton => {
+  radioButton.addEventListener('click', () => {
+    const labels = document.querySelectorAll('.radio-buttons label');
+    labels.forEach(label => {
+      label.classList.remove('checked');
+    });
+    radioButton.parentElement.classList.add('checked');
+    formData.set('ocrEngine', radioButton.value);
+    console.log(formData.get('ocrEngine'));
+  });
+});
+
+// set the initial value of the "ocrEngine" field
+const initialRadioButton = document.querySelector('.radio-buttons input[type="radio"]:checked');
+formData.set('ocrEngine', initialRadioButton.value);
+
 
 // Function to handle the "Extract Text" button click
 function handleExtractClick() {
@@ -13,12 +32,14 @@ function handleExtractClick() {
   }
 
   // Create a new form data object and add the file to it
-  const formData = new FormData();
   formData.append('image', file);
   formData.append('language', 'eng');
   formData.append('isOverlayRequired', 'true');
-  formData.append('ocrEngine', '2');
   formData.append('detectOrientation', 'true');
+// Console all info from form data
+  for (var value of formData.values()) {
+    console.log(value);
+  }
 
   // Make a POST request to the OCR.Space API with the form data
   fetch('https://api.ocr.space/parse/image', {
@@ -37,6 +58,8 @@ function handleExtractClick() {
       // Display the extracted text in the result text element
       // resultText.textContent = extractedText;
       console.log(extractedText);
+      // After the text is extracted, clear the file input
+      fileInput.value = '';
     } else {
       // Handle the case where the ParsedResults property is missing or not an array
       console.error('Invalid response data: missing or invalid ParsedResults property');
