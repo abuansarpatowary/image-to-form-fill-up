@@ -1,0 +1,50 @@
+body {
+  width: 400px;
+  text-align: center;
+  font-size: 1rem;
+}
+/* Style for file input container */
+.file-input {
+  text-align: center;
+}
+
+/* Style for file input */
+#file-input {
+  margin-bottom: 1rem;
+  border: #007fff 1px solid;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+}
+input::file-selector-button {
+  font-weight: bold;
+  color: #007fff;
+  padding: 0.5em;
+  height: 45px;
+  border: thin solid grey;
+  border-radius: 0.25rem;
+}
+
+/* Style for submit button */
+#extract-button {
+  background-color: #007fff;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+/* Style for submit button on hover */
+#extract-button:hover {
+  background-color: #0578eb;
+}
+/* Response Text  */
+#response-text {
+  margin-top: 1rem;
+  border: #007fff 1px solid;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  height: 100px;
+}
