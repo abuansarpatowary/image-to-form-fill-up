@@ -1,7 +1,7 @@
 // Get references to the HTML elements we need to manipulate
 const fileInput = document.getElementById('file-input');
 const extractButton = document.getElementById('extract-button');
-const resultText = document.getElementById('response-text');
+const resultText = document.getElementById('response');
 const radioButtons = document.querySelectorAll('.radio-buttons input[type="radio"]');
 const formData = new FormData();
 
@@ -34,6 +34,7 @@ function handleExtractClick() {
   // Create a new form data object and add the file to it
   formData.append('image', file);
   formData.append('language', 'eng');
+  formData.append('language', 'ara');
   formData.append('isOverlayRequired', 'true');
   formData.append('detectOrientation', 'true');
 // Console all info from form data
@@ -48,9 +49,10 @@ function handleExtractClick() {
       'apikey': 'aeea54b48988957'
     },
     body: formData
-  })
+  }) // Convert the response to JSON
   .then(response => response.json())
-  .then(data => {
+    .then(data => {
+      console.log(data);
     // Check that the ParsedResults property exists and is an array
     if (data.ParsedResults && Array.isArray(data.ParsedResults)) {
       // Get the extracted text from the first ParsedResult object in the array
