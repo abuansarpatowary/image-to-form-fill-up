@@ -1,11 +1,44 @@
 body {
-  width: 400px;
+  background: #fff;
+  width: 750px;
+  height: 100vh;
   text-align: center;
   font-size: 1rem;
+  padding: 20px;
 }
+
+.full-content {
+  padding: 40px;
+  background: #f8f8f8;
+  border: 3px dashed #d2d1d6;
+}
+
 /* Style for file input container */
 .file-input {
   text-align: center;
+}
+
+/* Hide the default appearance */
+input[type="file"] {
+  display: none;
+}
+
+/* Style the custom button */
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Style the custom button on hover */
+.custom-file-upload:hover {
+  background-color: #3e8e41;
 }
 
 /* Style for file input */
@@ -15,6 +48,7 @@ body {
   border-radius: 0.25rem;
   padding: 0.5rem 1rem;
 }
+
 input::file-selector-button {
   font-weight: bold;
   color: #007fff;
@@ -40,11 +74,11 @@ input::file-selector-button {
 #extract-button:hover {
   background-color: #0578eb;
 }
+
 /* Response Text  */
-#response-text {
+#response {
   margin-top: 1rem;
   border: #007fff 1px solid;
   border-radius: 0.25rem;
   padding: 0.5rem 1rem;
-  height: 100px;
 }

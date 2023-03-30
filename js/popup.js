@@ -1,7 +1,7 @@
 // Get references to the HTML elements we need to manipulate
 const fileInput = document.getElementById('file-input');
 const extractButton = document.getElementById('extract-button');
-const resultText = document.getElementById('response-text');
+const resultText = document.getElementById('response');
 const radioButtons = document.querySelectorAll('.radio-buttons input[type="radio"]');
 const formData = new FormData();
 
@@ -20,7 +20,24 @@ radioButtons.forEach(radioButton => {
 // set the initial value of the "ocrEngine" field
 const initialRadioButton = document.querySelector('.radio-buttons input[type="radio"]:checked');
 formData.set('ocrEngine', initialRadioButton.value);
+function displayName(name) {
+      const words = name.split(" ");
+      let firstName, lastName;
 
+      if (words.length === 3) {
+        firstName = words.slice(0, 2).join(" ");
+        lastName = words[2];
+      } else if (words.length === 2) {
+        firstName = words[0];
+        lastName = words[1];
+      } else {
+        console.error("Invalid name format");
+      }
+      console.log(words);
+      console.log(firstName); // Output: "MOHAMMAD HABIBUR"
+  console.log(lastName); // Output: "RAHMAN"
+  
+}
 
 // Function to handle the "Extract Text" button click
 function handleExtractClick() {
@@ -40,7 +57,6 @@ function handleExtractClick() {
   for (var value of formData.values()) {
     console.log(value);
   }
-
   // Make a POST request to the OCR.Space API with the form data
   fetch('https://api.ocr.space/parse/image', {
     method: 'POST',
@@ -48,9 +64,12 @@ function handleExtractClick() {
       'apikey': 'aeea54b48988957'
     },
     body: formData
-  })
+  }) // Convert the response to JSON
   .then(response => response.json())
-  .then(data => {
+    .then(data => {
+     
+
+      console.log(data);
     // Check that the ParsedResults property exists and is an array
     if (data.ParsedResults && Array.isArray(data.ParsedResults)) {
       // Get the extracted text from the first ParsedResult object in the array
@@ -60,6 +79,17 @@ function handleExtractClick() {
       console.log(extractedText);
       // After the text is extracted, clear the file input
       fileInput.value = '';
+       //  response data to json
+      const text = extractedText;
+      const regex = /(?<=Name:)[^a-zA-Z\s]*(?<name>[a-zA-Z\s]+)[^a-zA-Z\s]*(?=Father's Name)/;
+      const match = text.match(regex);
+      const name = match?.groups?.name; // "MST NAJMA BEGUM"
+
+      /* const regex2 = /(?<=Father's Name)[^a-zA-Z\s]*(?<name>[a-zA-Z\s]+)[^a-zA-Z\s]*(?=Mother's Name:)/;
+      const match2 = text.match(regex2);
+      const fatherName = match2?.groups?.name; // "MST NAJMA BEGUM" */
+      displayName(name);
+
     } else {
       // Handle the case where the ParsedResults property is missing or not an array
       console.error('Invalid response data: missing or invalid ParsedResults property');
